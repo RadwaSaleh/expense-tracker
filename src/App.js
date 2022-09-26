@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import ExpenseItem from './components/ExpenseItem';
 import Expenses from './components/Expenses';
+import NewExpense from "./components/NewExpense";
 
 function App() {
     const expenses = [
@@ -29,9 +29,14 @@ function App() {
             date: new Date(2021, 5, 12),
         },
     ];
+
+    const addNewExpenseHandler = (newExpense) => {
+        expenses.push(newExpense)
+    }
   return (
     <div className="App">
         <h2>Expense Tracker</h2>
+        <NewExpense onAddNewExpense = {addNewExpenseHandler}/>
         <Expenses items={expenses}/>
     </div>
   );
