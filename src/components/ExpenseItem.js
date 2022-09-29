@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
 
+// Stateless component = presentational component = dumb component
 function ExpenseItem(props){
     const [title, setTitle] = useState(props.title)
     const clickHandler = () => {
