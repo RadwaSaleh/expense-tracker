@@ -1,37 +1,40 @@
-import logo from './logo.svg';
+import {useState} from "react";
 import './App.css';
 import Expenses from './components/Expenses';
 import NewExpense from "./components/NewExpense";
 
+const FIXED_EXPENSES = [
+    {
+        id: Math.random(),
+        title: 'Apartment Rent',
+        amount: 800,
+        date: new Date(2022, 4, 27),
+    },
+    {
+        id: Math.random(),
+        title: 'Gas',
+        amount: 50,
+        date: new Date(2022, 11, 1) },
+    {
+        id: Math.random(),
+        title: 'Grocery Shopping',
+        amount: 200,
+        date: new Date(2022, 9, 1),
+    },
+    {
+        id: Math.random(),
+        title: 'Transportation',
+        amount: 30,
+        date: new Date(2022, 10, 1),
+    },
+];
 function App() {
-    const expenses = [
-        {
-            id: 'e1',
-            title: 'Toilet Paper',
-            amount: 94.12,
-            date: new Date(2020, 7, 14),
-        },
-        {
-            id: 'e2',
-            title: 'New TV',
-            amount: 799.49,
-            date: new Date(2021, 2, 12) },
-        {
-            id: 'e3',
-            title: 'Car Insurance',
-            amount: 294.67,
-            date: new Date(2021, 2, 28),
-        },
-        {
-            id: 'e4',
-            title: 'New Desk (Wooden)',
-            amount: 450,
-            date: new Date(2021, 5, 12),
-        },
-    ];
+    const [expenses, setExpenses] = useState(FIXED_EXPENSES);
 
-    const addNewExpenseHandler = (newExpense) => {
-        expenses.push(newExpense)
+    const addNewExpenseHandler = (expense) => {
+        setExpenses((prevState) => {
+            return [expense, ...prevState];
+        });
     }
   return (
     <div className="App">
