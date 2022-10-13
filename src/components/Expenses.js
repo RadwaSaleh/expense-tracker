@@ -12,7 +12,13 @@ function Expenses(props){
     return(
         <div className="expenses">
             <ExpensesFilter selectedOption={expensesYear} onSelectExpensesYear={selectExpensesYearHandler}/>
-            {props.items.map((item) => <ExpenseItem title={item.title} amount={item.amount} date={item.date}/>)}
+            <ul>
+                {props.items.map((item) =>
+                    <li>
+                        <ExpenseItem key={item.id} title={item.title} amount={item.amount} date={item.date}/>
+                    </li>
+                )}
+            </ul>
         </div>
     );
 }
