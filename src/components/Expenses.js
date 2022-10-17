@@ -15,8 +15,8 @@ function Expenses(props){
             <ExpensesFilter selectedOption={expensesYear} onSelectExpensesYear={selectExpensesYearHandler}/>
             <ul>
                 {filteredExpenses.map((item) =>
-                    <li>
-                        <ExpenseItem key={item.id} title={item.title} amount={item.amount} date={item.date}/>
+                    <li key={item.id}>
+                        <ExpenseItem title={item.title} amount={item.amount} date={item.date}/>
                     </li>
                 )}
             </ul>
