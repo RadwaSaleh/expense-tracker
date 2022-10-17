@@ -1,6 +1,7 @@
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
 
+// Stateless component = presentational component = dumb component
 function ExpenseItem(props){
     return(
         <div className="expense-item">

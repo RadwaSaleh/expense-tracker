@@ -1,14 +1,25 @@
+import {useState} from "react";
 import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
+import ExpensesFilter from "./ExpensesFilter";
 
 function Expenses(props){
-    const items = [];
-    for(let i=0; i < props.items.length; i++){
-        items.push(<ExpenseItem title={props.items[i].title} amount={props.items[i].amount} date={props.items[i].date}/>)
+    const [expensesYear, setExpensesYear] = useState('2022');
+    const selectExpensesYearHandler = (selectedExpensesYear) => {
+        setExpensesYear(selectedExpensesYear);
     }
+    const filteredExpenses = props.items.filter((item) => item.date.getFullYear().toString() === expensesYear);
+
     return(
         <div className="expenses">
-            {items}
+            <ExpensesFilter selectedOption={expensesYear} onSelectExpensesYear={selectExpensesYearHandler}/>
+            <ul>
+                {filteredExpenses.map((item) =>
+                    <li>
+                        <ExpenseItem key={item.id} title={item.title} amount={item.amount} date={item.date}/>
+                    </li>
+                )}
+            </ul>
         </div>
     );
 }
