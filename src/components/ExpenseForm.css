@@ -23,11 +23,12 @@
 }
 
 .new-expense__control.invalid label {
-    color: red;
+    color: #ea4431;
 }
 
 .new-expense__control.invalid input {
-    background: red;
+    border-color: #ea4431;
+    background: #e1afb6;
 }
 
 .new-expense__actions {
