@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import './App.css';
 import Expenses from './components/Expenses';
 import NewExpense from "./components/NewExpense";
@@ -37,11 +37,11 @@ function App() {
         });
     }
   return (
-    <div className="App">
-        <h2>Expense Tracker</h2>
+    <Fragment>
+        <h2 className="App">Expense Tracker</h2>
         <NewExpense onAddNewExpense = {addNewExpenseHandler}/>
         <Expenses items={expenses}/>
-    </div>
+    </Fragment>
   );
 }
 
