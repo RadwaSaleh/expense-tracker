@@ -31,6 +31,12 @@
     background: #e1afb6;
 }
 
-.new-expense__actions {
+.new-expense__actions{
     text-align: right;
+}
+
+.new-expense__actions:disabled{
+    background: #fff;
+    color: #ccc;
+    cursor: no-drop;
 }

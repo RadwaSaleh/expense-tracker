@@ -1,5 +1,5 @@
 import './ExpenseForm.css'
-import {useState} from "react";
+import {useState, useRef} from "react";
 
 const ExpenseForm = (props) => {
     /**
@@ -13,10 +13,12 @@ const ExpenseForm = (props) => {
     const [isValidTitle, setIsValidTitle] = useState(true);
     const [isValidAmount, setIsValidAmount] = useState(true);
     const [isValidDate, setIsValidDate] = useState(true);
+    const submitBtnRef = useRef(null);
 
     const titleChangeHandler = (event) => {
         if(enteredTitle.trim().length > 0){
             setIsValidTitle(true);
+            submitBtnRef.current.removeAttribute('disabled');
         }
         setEnteredTitle(event.target.value);
     }
@@ -24,6 +26,7 @@ const ExpenseForm = (props) => {
     const amountChangeHandler = (event) => {
         if(enteredAmount.trim().length > 0){
             setIsValidAmount(true);
+            submitBtnRef.current.removeAttribute('disabled');
         }
         setEnteredAmount(event.target.value)
     }
@@ -31,6 +34,7 @@ const ExpenseForm = (props) => {
     const dateChangeHandler = (event) => {
         if(enteredDate.trim().length > 0){
             setIsValidDate(true);
+            submitBtnRef.current.removeAttribute('disabled');
         }
         setEnteredDate(event.target.value)
     }
@@ -45,18 +49,22 @@ const ExpenseForm = (props) => {
             amount: enteredAmount,
             date: new Date(enteredDate)
         }
-        if(enteredTitle.trim().length === 0){
-            setIsValidTitle(false);
-            return;
+        if (enteredTitle.trim().length || enteredAmount.trim().length === 0 || enteredDate.trim().length === 0){
+            submitBtnRef.current.setAttribute('disabled', true);
+            if(enteredTitle.trim().length === 0){
+                setIsValidTitle(false);
+                return;
+            }
+            if(enteredAmount.trim().length === 0){
+                setIsValidAmount(false);
+                return;
+            }
+            if(enteredDate.trim().length === 0){
+                setIsValidDate(false);
+                return;
+            }
         }
-        if(enteredAmount.trim().length === 0){
-            setIsValidAmount(false);
-            return;
-        }
-        if(enteredDate.trim().length === 0){
-            setIsValidDate(false);
-            return;
-        }
+
         props.onSaveExpenseData(newExpenseData);
         setEnteredTitle('');
         setEnteredAmount('');
@@ -78,7 +86,7 @@ const ExpenseForm = (props) => {
                 <label>Date: *</label>
                 <input onChange={dateChangeHandler} type='date' value={enteredDate} min='2022-01-01'/>
                 </div>
-                <button className='new-expense__actions' type='submit'>Add New Expense</button>
+                <button className='new-expense__actions' type='submit' ref={submitBtnRef} disabled={true}>Add New Expense</button>
                 <button className='new-expense__actions' type='button' onClick={props.onCancel}>Cancel</button>
                 </form>
                 </div>
