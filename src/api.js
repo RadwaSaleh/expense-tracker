@@ -1,5 +1,5 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+const axios = require('axios');
+const MockAdapter = require('axios-mock-adapter');
 const mock = new MockAdapter(axios);
 
 mock.onGet("http://localhost:3000/expenses")
